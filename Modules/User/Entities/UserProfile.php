@@ -22,7 +22,7 @@ class UserProfile extends Model
     public $timestamps = false;
     
     public function userR(){
-        return $this->belongsTo(UserRepository::class);
+        return $this->belongsTo(UserRepository::class,'user_id');
     }
     // protected static function newFactory()
     // {

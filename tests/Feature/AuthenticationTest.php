@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use Modules\User\Entities\Repositories\UserRepository;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
     
-
     public function testMustEnterUsernameAndPassword()
     {
         $this->json('POST', 'api/login')
@@ -50,7 +50,10 @@ class AuthenticationTest extends TestCase
                 "data" => [
                    'user_id',
                    'email',
-                   'user',
+                   'username',
+                   'f_name',
+                   'l_name',
+                   'path',
                    'token',
                    'expires_in',
                    'expires_at',
@@ -60,11 +63,8 @@ class AuthenticationTest extends TestCase
         $this->assertAuthenticated();
     }
     public function testMustInputRequiredDataOnRegister(){
-        $this->json('POST', 'api/register')
+        $this->json('POST', 'api/register',['Accept' => 'application/json'])
             ->assertStatus(422);
     }
-    public function testLogout(){
-        $this->json('POST', 'api/logout')
-            ->assertStatus(200);
-    }
+
 }

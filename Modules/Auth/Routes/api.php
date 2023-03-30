@@ -15,10 +15,7 @@ use Illuminate\Http\Request;
 Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 
-// Route::group(['middleware' => ['api','jwt.verify']], function ($router) {
-//     Route::post('/logout', [AuthController::class, 'logout']);
-//     // Route::post('/refresh', [AuthController::class, 'refresh']);
-// });
-// Route::middleware('auth:api')->get('/auth', function (Request $request) {
-//     return $request->user();
-// });
+Route::group(['middleware' => ['api','jwt.verify']], function ($router) {
+    Route::post('/logout', 'AuthController@logout');
+    Route::post('/refresh', 'AuthController@refresh');
+});

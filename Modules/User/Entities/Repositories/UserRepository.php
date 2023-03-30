@@ -36,18 +36,18 @@ class UserRepository extends User
             $payload['user_profile']['user_id'] = $id;
             $payload['user_profile']['path'] = $req->file('image')->store("{$id}_images");
             $profile = UserProfileRepository::create($payload['user_profile']);
+
             UserService::sendEmailReg($user);
             $cred = [
                     "username" => $payload['user']['username'],
                     "password" => $payload['user']['password']
             ];
+
             DB::commit();
             $auth = (new AuthService($user))->login($cred);
-
-            return [
-                'user' => $user,
-                'auth' => $auth   
-            ];
+            
+            return $auth;
+           
 
         }catch(QueryException $q){
 

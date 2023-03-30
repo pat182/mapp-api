@@ -37,7 +37,7 @@ class User extends Authenticatable implements JWTSubject
         'password'
     ];
     public function userProfile(){
-        return $this->hasOne(UserProfileRepository::class);
+        return $this->hasOne(UserProfileRepository::class,'user_id');
     }
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

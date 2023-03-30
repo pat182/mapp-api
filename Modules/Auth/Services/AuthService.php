@@ -27,18 +27,22 @@ class AuthService
             throw new LoginException();
             
        
-        $user = $this->userRepository::getUser(Auth::id())->first();
+        $user = $this->userRepository::getUser(Auth::id())
+        ->with('userProfile')->first();
         return $this->createToken($user);
 
     }
     private function createToken($user){
-        $token = auth()->setTTL(30)->login($user);
-        // Socket::BrodCast(['username' => $user->username,'action' => 'login']);
+        
+        $token = auth()->setTTL(1440)->login($user);
         $ttl = auth('api')->factory()->getTTL() * 60;
         return [
             'user_id' => $user->user_id,
             'email' => $user->email,
-            'user' => $user->username,
+            'username' => $user->username,
+            'f_name' => $user->userProfile->f_name,
+            'l_name' => $user->userProfile->l_name,
+            'path' => $user->userProfile->path,
             'token' => $token,
             'expires_in' => $ttl,
             'expires_at' => Carbon::now()->addMinutes(intval($ttl))->toDateTimeString()

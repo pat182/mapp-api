@@ -24,8 +24,21 @@ class AuthController extends Controller
         
     }
     public function login(LogInRequest $req){
-       
-        return response()->json( ["data" => $this->authService->login($req->payload())] );
+        
+        return new LoginResource( $this->authService->login($req->payload()) );
+        // return response()->json( ["data" => $this->authService->login($req->payload())] );
+
+    }
+
+    public function refresh()
+    {
+        return auth()->refresh();
+    }
+
+    public function logout(){
+
+        auth()->logout();
+        return response()->json(['message' => 'Successfully logged out']);
 
     }
     
