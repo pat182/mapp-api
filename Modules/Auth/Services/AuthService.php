@@ -7,6 +7,7 @@ use Exception;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Modules\User\Entities\Repositories\UserRepository;
+use Modules\Auth\Exceptions\LoginException;
 
 
 class AuthService
@@ -20,16 +21,15 @@ class AuthService
 
     public function login($request)
     {
-        
-        
-        if (!JWTAuth::attempt($request)){
 
-            return response()->json(['error'=>'Invalid Credentials'],400);
-        }
-        
+        if (!JWTAuth::attempt($request))
+
+            throw new LoginException();
+            
        
         $user = $this->userRepository::getUser(Auth::id())->first();
         return $this->createToken($user);
+
     }
     private function createToken($user){
         $token = auth()->setTTL(30)->login($user);
@@ -37,6 +37,7 @@ class AuthService
         $ttl = auth('api')->factory()->getTTL() * 60;
         return [
             'user_id' => $user->user_id,
+            'email' => $user->email,
             'user' => $user->username,
             'token' => $token,
             'expires_in' => $ttl,
