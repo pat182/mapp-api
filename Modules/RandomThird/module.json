@@ -1,0 +1,11 @@
+{
+    "name": "RandomThird",
+    "alias": "randomthird",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\RandomThird\\Providers\\RandomThirdServiceProvider"
+    ],
+    "files": []
+}
