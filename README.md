@@ -4,7 +4,7 @@
 
 - php artisan jwt:secret
 
-- Basic rest Authentication with test cases(laravel 10(php 8.1), tymon jwt, nwidart modules)
+-rest Authentication with test cases(laravel 10(php 8.1), tymon jwt, nwidart modules)
 
 - integrated third party api for currencies using http client:(https://app.freecurrencyapi.com)
 
