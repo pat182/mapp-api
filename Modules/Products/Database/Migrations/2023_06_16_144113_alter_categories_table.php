@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string( 'user' , 32 )->index();
             $table->foreign( 'user' )->references( 'user_id' )->on( 'user' );
-
+            //test
         });
 
     }
