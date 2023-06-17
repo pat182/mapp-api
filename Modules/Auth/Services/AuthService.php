@@ -20,32 +20,36 @@ class AuthService
     }
 
     public function login($request)
-    {
-
+    {   
+        $rm = isset($request['remember_me']) ? $request['remember_me'] : false;
+        unset($request['remember_me']);
         if (!JWTAuth::attempt($request))
 
             throw new LoginException();
             
-       
+        
         $user = $this->userRepository::getUser(Auth::id())
         ->with('userProfile')->first();
-        return $this->createToken($user);
+
+        return $this->createToken($user,$rm);
 
     }
-    private function createToken($user){
+    private function createToken($user,$rm){
         
-        $token = auth()->setTTL(1440)->login($user);
+
+        $token = $rm ? auth()->setTTL(null)->login($user) : auth()->setTTL(1440)->login($user);
         $ttl = auth('api')->factory()->getTTL() * 60;
         return [
+
             'user_id' => $user->user_id,
             'email' => $user->email,
             'username' => $user->username,
             'f_name' => $user->userProfile->f_name,
             'l_name' => $user->userProfile->l_name,
-            'path' => $user->userProfile->path,
             'token' => $token,
             'expires_in' => $ttl,
             'expires_at' => Carbon::now()->addMinutes(intval($ttl))->toDateTimeString()
+
         ];
 
     }

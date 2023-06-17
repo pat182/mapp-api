@@ -2,14 +2,16 @@
 
 namespace Modules\User\Services;
 
-use App\Notifications\RegistrationNotification;
 use Modules\User\Entities\Repositories\UserRepository;
+use Modules\Auth\Notifications\RegistrationNotification;
+
 
 class UserService
 {
 
     
     public static function generateUserID() : string {
+
         $userId = bin2hex(random_bytes(16));
 
         if(UserRepository::getUser($userId)->first())
@@ -20,9 +22,14 @@ class UserService
 
 
     }
-    public static function sendEmailReg($user) : void
+    public static function sendEmail($user,string $emailType='') : void
     {
-        $user->notify(new RegistrationNotification());
+        if(!$emailType)
+
+            $user->notify( new RegistrationNotification() );
+
+        
+        
         
     }
     
