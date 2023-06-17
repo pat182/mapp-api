@@ -11,15 +11,19 @@ class LogInRequest extends FormRequest{
     */
     public function rules(){
     	return  [
+
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'remember_me' => 'boolean|nullable'
+
         ]; 
     }
    	public function payload()
     {
         return $this->only([
             "username",
-            "password"
+            "password",
+            'remember_me'
         ]);
     }
 }

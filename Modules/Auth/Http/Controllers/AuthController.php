@@ -20,7 +20,8 @@ class AuthController extends Controller
 
     public function register(RegisterUserRequest $req){
 
-        return new LoginResource($this->userRepo->createUser($req));
+        // return new LoginResource($this->userRepo->createUser($req));
+        return response()->json(['message' => $this->userRepo->createUser($req)],200);
         
     }
     public function login(LogInRequest $req){
