@@ -24,6 +24,7 @@ class UserRepository extends User
         $payload = $req->payload();
         DB::beginTransaction();
         $id = UserService::generateUserID();
+
         try{
             
             $user = self::create(array_merge($payload['user'], [
@@ -34,31 +35,40 @@ class UserRepository extends User
             ]));
 
             $payload['user_profile']['user_id'] = $id;
-            $payload['user_profile']['path'] = $req->file('image')->store("{$id}_images");
+            // $payload['user_profile']['path'] = $req->file('image')->store("{$id}_images");
+
             $profile = UserProfileRepository::create($payload['user_profile']);
 
-            UserService::sendEmailReg($user);
+            UserService::sendEmail($user);
+
             $cred = [
-                    "username" => $payload['user']['username'],
-                    "password" => $payload['user']['password']
+
+                "username" => $payload['user']['username'],
+                "password" => $payload['user']['password']
+
             ];
 
             DB::commit();
-            $auth = (new AuthService($user))->login($cred);
             
-            return $auth;
+            //log in after creating
+            // $auth = (new AuthService($user))->login($cred);
+            // return $auth;
+            
+            return "User Succesfully Created";
+            
+            
            
 
         }catch(QueryException $q){
 
             DB::rollback();
-            UserService::deleteDir("{$id}_images");
+            // UserService::deleteDir("{$id}_images");
             throw (new RegisterException);
 
         }catch(\Exception $e){
-
+            // dd($e);
             DB::rollback();
-            UserService::deleteDir("{$id}_images");
+            // UserService::deleteDir("{$id}_images");
             throw (new RegisterException);
             
         }

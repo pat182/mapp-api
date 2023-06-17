@@ -1,5 +1,10 @@
 <?php
 
 return [
-    'name' => 'Auth'
+    'name' => 'Auth',
+    'markdown' => [
+        'paths' => resource_path('views/vendor/mail')
+
+    ]
+
 ];

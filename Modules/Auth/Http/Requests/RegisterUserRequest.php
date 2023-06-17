@@ -18,7 +18,7 @@ class RegisterUserRequest extends FormRequest{
             'user.password' => 'required|string|min:8',
             'user_profile.f_name' => 'nullable|regex:/^[a-z0-9 .\-,]+$/i',
             'user_profile.l_name' => 'nullable|regex:/^[a-z0-9 .\-,]+$/i',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg'
+            // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg'
             
         ]; 
     }
@@ -31,7 +31,6 @@ class RegisterUserRequest extends FormRequest{
             "user.password",
             "user_profile.f_name",
             "user_profile.l_name",
-            "image"
 
         ]);
     }

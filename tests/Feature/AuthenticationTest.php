@@ -43,7 +43,7 @@ class AuthenticationTest extends TestCase
             'username' => 'pat182',
             'password' => 'test182!@#'
         ];
-        // $this->assertJsonStructure
+        
         $this->json('POST', 'api/login', $loginData, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure([
@@ -53,7 +53,6 @@ class AuthenticationTest extends TestCase
                    'username',
                    'f_name',
                    'l_name',
-                   'path',
                    'token',
                    'expires_in',
                    'expires_at',
@@ -63,8 +62,11 @@ class AuthenticationTest extends TestCase
         $this->assertAuthenticated();
     }
     public function testMustInputRequiredDataOnRegister(){
+
         $this->json('POST', 'api/register',['Accept' => 'application/json'])
             ->assertStatus(422);
+
     }
+
 
 }
