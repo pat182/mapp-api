@@ -5,7 +5,7 @@ namespace Modules\Auth\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Auth\Services\AuthService;
-use Modules\User\Transformer\LoginResource;
+use Modules\Auth\Transformer\LoginResource;
 use Modules\User\Entities\Repositories\UserRepository;
 use Modules\Auth\Http\Requests\{RegisterUserRequest,LogInRequest};
 

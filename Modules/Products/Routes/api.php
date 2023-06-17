@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/products', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['api','jwt.verify']], function ($router) {
+    
+    Route::group(['prefix' => 'categories'],function(){
+        Route::post('/', 'CategoriesController@create');
+    });
+
+    
 });

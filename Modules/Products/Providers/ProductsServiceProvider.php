@@ -24,7 +24,7 @@ class ProductsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerTranslations();
+        // $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
@@ -78,18 +78,18 @@ class ProductsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerTranslations()
-    {
-        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
+    // public function registerTranslations()
+    // {
+    //     $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
-        if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
-            $this->loadJsonTranslationsFrom($langPath);
-        } else {
-            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
-            $this->loadJsonTranslationsFrom(module_path($this->moduleName, 'Resources/lang'));
-        }
-    }
+    //     if (is_dir($langPath)) {
+    //         $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
+    //         $this->loadJsonTranslationsFrom($langPath);
+    //     } else {
+    //         $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
+    //         $this->loadJsonTranslationsFrom(module_path($this->moduleName, 'Resources/lang'));
+    //     }
+    // }
 
     /**
      * Get the services provided by the provider.

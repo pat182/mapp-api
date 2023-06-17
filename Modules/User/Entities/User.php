@@ -6,11 +6,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\User\Entities\Repositories\UserProfileRepository;
+use Modules\User\Database\Factories\UserFactory;
 
 class User extends Authenticatable implements JWTSubject
 {
     // use HasFactory;
     use Notifiable;
+    // ,HasFactory;
 
     protected $table = 'user';
 
@@ -60,7 +62,7 @@ class User extends Authenticatable implements JWTSubject
     }
     protected static function newF()
     {
-        return Modules\User\Database\factories\UserFactory::new();
+        return UserFactory::new();
     }
 
     
