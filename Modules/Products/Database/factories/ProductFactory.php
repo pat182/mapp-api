@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Products\Database\Factories;
+namespace Modules\Products\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Products\Entities\Product;
@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'category' => CategoryRepository::inRandomOrder()->first()->id,
             'name' => fake()->word(5),
             'description' => fake()->realText(180)
-            
+
         ];
 
     }

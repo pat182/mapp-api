@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Products\Database\Factories;
+namespace Modules\Products\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\User\Entities\Repositories\UserRepository;
