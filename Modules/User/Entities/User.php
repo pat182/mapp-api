@@ -5,6 +5,7 @@ namespace Modules\User\Entities;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\User\Database\factories\UserFactory;
 use Modules\User\Entities\Repositories\UserProfileRepository;
 
 class User extends Authenticatable implements JWTSubject
@@ -60,7 +61,7 @@ class User extends Authenticatable implements JWTSubject
     }
     protected static function newF()
     {
-        return Modules\User\Database\factories\UserFactory::new();
+        return UserFactory::new();
     }
 
     
