@@ -8,10 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\User\Database\factories\UserFactory;
 use Modules\User\Entities\Repositories\UserProfileRepository;
 
+
 class User extends Authenticatable implements JWTSubject
 {
     // use HasFactory;
     use Notifiable;
+    // ,HasFactory;
 
     protected $table = 'user';
 

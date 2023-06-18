@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
 
-            $table->unsignedBigInteger('role')
-            ->after('email')
-            ->default(1);
-            
-            // $table->foreign('role')->references('role_id')->on('role');
+        Schema::table( 'categories' , function (Blueprint $table) {
 
+            $table->string( 'user' , 32 )->index();
+            $table->foreign( 'user' )->references( 'user_id' )->on( 'user' );
+            //test
         });
-    }
 
+    }
     /**
      * Reverse the migrations.
      *
@@ -31,6 +29,9 @@ return new class extends Migration
      */
     public function down()
     {
-        $table->dropColumn('role');
+        
+        $table->dropColumn('user');
+
     }
+
 };

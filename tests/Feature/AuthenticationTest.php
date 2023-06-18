@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Modules\User\Entities\Repositories\UserRepository;
-use Illuminate\Http\UploadedFile;
+// use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase

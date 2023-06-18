@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\User\Database\Seeders;
+namespace Modules\Products\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class UserDatabaseSeeder extends Seeder
+class ProductsDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +16,8 @@ class UserDatabaseSeeder extends Seeder
     {
         
         Model::unguard();
-        // $this->call(UserTableSeeder::class);
+        // $this->call(CategoriesTableSeeder::class);
+        // $this->call(ProductTableSeeder::class);
         
     }
 }

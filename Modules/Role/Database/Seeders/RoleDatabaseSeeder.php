@@ -15,6 +15,6 @@ class RoleDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $this->call(RoleTableSeeder::class);
+        // $this->call(RoleTableSeeder::class);
     }
 }
