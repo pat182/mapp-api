@@ -1,3 +1,5 @@
+rest Authentication with test cases(laravel 10(php 8.1), tymon jwt, nwidart modules)
+
 - composer install
 
 - follow the migration order 
@@ -12,7 +14,7 @@
 
 - php artisan jwt:secret
 
-- rest Authentication with test cases(laravel 10(php 8.1), tymon jwt, nwidart modules)
+
 
 
 
