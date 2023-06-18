@@ -5,7 +5,7 @@ namespace Modules\User\Entities;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Modules\User\Database\Factories\UserFactory;
+use Modules\User\Database\factories\UserFactory;
 use Modules\User\Entities\Repositories\UserProfileRepository;
 
 

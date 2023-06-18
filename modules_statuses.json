@@ -1,6 +1,6 @@
 {
     "Auth": true,
     "User": true,
-    "RandomThird": true,
-    "Products": true
+    "Products": true,
+    "Role": true
 }
