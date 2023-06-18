@@ -19,5 +19,9 @@ Route::group(['middleware' => ['api','jwt.verify']], function ($router) {
         Route::post('/', 'CategoriesController@create');
     });
 
+    Route::group(['prefix' => 'product'],function(){
+        Route::post('/', 'ProductsController@create');
+    });
+
     
 });
