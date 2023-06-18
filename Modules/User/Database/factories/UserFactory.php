@@ -19,10 +19,12 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+
             'user_id' => bin2hex(random_bytes(16)),
             'username' => fake()->username(),
             'email' => fake()->unique()->safeEmail(),
-            'password' => bcrypt('test123456'), // password
+            'role' => 2,
+            'password' => bcrypt('test123!@#'), // password
             'remember_token' => Null,
         ];
     }
