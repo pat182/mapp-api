@@ -11,10 +11,12 @@ use Modules\Products\Entities\Repositories\ProductPhotoRepository;
 
 class ProductRepository extends Product
 {
-	// public function __construct(){
+	public function __construct(){
 
+        $this->productPhoto = (new ProductPhotoRepository());
 
- //    }
+    }
+
     public function getProduct(array $params,$catId){
         
         $page = isset($params['page']) ? $params['page'] : 1;
@@ -65,11 +67,14 @@ class ProductRepository extends Product
     }
     public function destroyProduct(string $id) : array {
 
-        $product = static::find($id);
+        $product = static::with('productPhoto')->find($id);
             
         if(!$product)
 
             throw new NoDataFoundException();
+
+        
+        $this->productPhoto->deletePhoto($product);
 
         $product->delete();
 
@@ -85,7 +90,7 @@ class ProductRepository extends Product
 
         $payload = $req->payload();
         $payload['product'] = decrypt($payload['product']);
-        $photo = (new ProductPhotoRepository())->uploadPhoto($payload);
+        $photo = $this->productPhoto->uploadPhoto($payload);
         
         return $photo;
 

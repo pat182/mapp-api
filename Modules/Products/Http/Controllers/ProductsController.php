@@ -43,7 +43,10 @@ class ProductsController extends Controller
     }
     public function uploadPhoto(UploadPhotoRequest $req){
         
-        $this->product->uploadProductPhotos($req);
+        return response()->json([
+            "message" => "Successfully uploaded",
+            "data" => $this->product->uploadProductPhotos($req)
+        ],200);
 
     }
     // public function show($id)
