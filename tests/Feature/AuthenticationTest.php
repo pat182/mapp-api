@@ -41,7 +41,7 @@ class AuthenticationTest extends TestCase
 
         $loginData = [
             'username' => 'pat182',
-            'password' => 'test182!@#'
+            'password' => 'test123!@#'
         ];
         
         $this->json('POST', 'api/login', $loginData, ['Accept' => 'application/json'])
