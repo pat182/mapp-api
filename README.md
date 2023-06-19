@@ -16,6 +16,10 @@ rest Authentication with test cases(laravel 10(php 8.1), tymon jwt, nwidart modu
 
 
 
+https://documenter.getpostman.com/view/10909255/2s93sjUovY
+
+
+
 
 
 
