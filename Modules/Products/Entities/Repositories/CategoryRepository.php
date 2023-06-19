@@ -21,7 +21,7 @@ class CategoryRepository extends Categories
         $sort = isset($params['sort']) ? $params['sort'] : 'DESC';
         $order = isset($params['order']) ? $params['order'] : 'created_at';
         $perPage = isset($params['per_page']) ? $params['per_page'] : 10;
-
+        
         $category = static::when(isset($params['name']), function($q) use ($params){
 
             return $q->where( 'name', 'LIKE',  '%' . $params['name'] . '%' );

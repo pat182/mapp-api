@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\User\Services\UserService;
 use Modules\Auth\Services\AuthService;
 use Illuminate\Database\QueryException;
-use Modules\Auth\Exceptions\RegisterException;
-
+use App\Exceptions\ServerErrorException;
 
 class UserRepository extends User
 {
@@ -24,7 +23,7 @@ class UserRepository extends User
         $payload = $req->payload();
         DB::beginTransaction();
         $id = UserService::generateUserID();
-
+        
         try{
             
             $user = self::create(array_merge($payload['user'], [
@@ -60,16 +59,16 @@ class UserRepository extends User
            
 
         }catch(QueryException $q){
-
+            
             DB::rollback();
             // UserService::deleteDir("{$id}_images");
-            throw (new RegisterException);
+            throw (new ServerErrorException);
 
         }catch(\Exception $e){
-            // dd($e);
+            
             DB::rollback();
             // UserService::deleteDir("{$id}_images");
-            throw (new RegisterException);
+            throw (new ServerErrorException);
             
         }
         

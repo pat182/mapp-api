@@ -19,7 +19,7 @@ class AuthController extends Controller
     }
 
     public function register(RegisterUserRequest $req){
-
+        
         // return new LoginResource($this->userRepo->createUser($req));
         return response()->json(['message' => $this->userRepo->createUser($req)],200);
         
@@ -32,7 +32,9 @@ class AuthController extends Controller
 
     public function refresh()
     {
-        return auth()->refresh();
+        return response()->json([
+            "token" => auth()->refresh()
+        ]);
     }
 
     public function logout(){
