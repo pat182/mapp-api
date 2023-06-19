@@ -5,24 +5,24 @@ namespace App\Exceptions;
 use App\Exceptions\BaseException;
 
 
-class BadRequestException extends BaseException
+class NoDataFoundException extends BaseException
 {
     public function message()
     {
         
-        return 'Bad Request Exception';
+        return 'No Data Found';
     
     }
     
     public function statusCode()
     {
-        return 422;
+        return 404;
     }
 
     
     public function errorCode()
     {
-        return 'bad-request';
+        return 'no-data';
         
     }
 }

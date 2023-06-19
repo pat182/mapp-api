@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\User\Database\factories\UserFactory;
 use Modules\User\Entities\Repositories\UserProfileRepository;
+use Modules\Products\Entities\Repositories\CategoryRepository;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -64,6 +65,11 @@ class User extends Authenticatable implements JWTSubject
     protected static function newF()
     {
         return UserFactory::new();
+    }
+    public function categories(){
+
+        return $this->hasMany(CategoryRepository::class,'user');
+
     }
 
     
