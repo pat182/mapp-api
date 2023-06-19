@@ -36,16 +36,17 @@ class AuthService
     }
     private function createToken($user,$rm){
         
-
+        // 1440
         $token = $rm ? auth()->setTTL(null)->login($user) : auth()->setTTL(1440)->login($user);
         $ttl = auth('api')->factory()->getTTL() * 60;
+       
         return [
 
             'user_id' => $user->user_id,
             'email' => $user->email,
             'username' => $user->username,
-            'f_name' => $user->userProfile->f_name,
-            'l_name' => $user->userProfile->l_name,
+            'f_name' => $user->userProfile ? $user->userProfile->f_name : 'N/A',
+            'l_name' => $user->userProfile ? $user->userProfile->l_name : 'N/A',
             'token' => $token,
             'expires_in' => $ttl,
             'expires_at' => Carbon::now()->addMinutes(intval($ttl))->toDateTimeString()

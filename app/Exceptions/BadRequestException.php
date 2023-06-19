@@ -22,7 +22,7 @@ class BadRequestException extends BaseException
     
     public function errorCode()
     {
-        return '--';
+        return 'bad-request';
         
     }
 }

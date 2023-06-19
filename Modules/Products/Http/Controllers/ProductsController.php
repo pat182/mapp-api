@@ -4,8 +4,8 @@ namespace Modules\Products\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Products\Http\Requests\CreateProductRequest;
 use Modules\Products\Entities\Repositories\ProductRepository;
+use Modules\Products\Http\Requests\{CreateProductRequest,UploadPhotoRequest};
 
 class ProductsController extends Controller
 {
@@ -14,38 +14,55 @@ class ProductsController extends Controller
         $this->product = $product;
 
     }
-    public function index()
+    public function index(Request $req)
     {
+        $req->validate( [ 'category' => 'required' ] );
+
+        return response()->json([
+
+            'data' =>$this->product->getProduct( $req->query(),$req->category)
+
+        ],200);
         
     }
     public function create(CreateProductRequest $req)
     {
+
         return response()->json([
             'message' => 'Successfully Added A New Product',
             'data' => $this->product->createProduct($req->payload())
         ],200);
+
     }
-    
-    public function show($id)
+
+    public function destroy($pid)
     {
+
+        return response()->json($this->product->destroyProduct(decrypt($pid)),200); 
+
+    }
+    public function uploadPhoto(UploadPhotoRequest $req){
         
+        $this->product->uploadProductPhotos($req);
+
     }
+    // public function show($id)
+    // {
+        
+    // }
 
     
-    public function edit($id)
-    {
-        //
-    }
+    // public function edit($id)
+    // {
+    //     //
+    // }
 
     
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    // }
 
     
-    public function destroy($id)
-    {
-        //
-    }
+
 }

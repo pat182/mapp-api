@@ -15,12 +15,20 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['api','jwt.verify']], function ($router) {
     
-    Route::group(['prefix' => 'categories'],function(){
-        Route::post('/', 'CategoriesController@create');
-    });
+    Route::group(['prefix' => 'category'],function(){
 
-    Route::group(['prefix' => 'product'],function(){
-        Route::post('/', 'ProductsController@create');
+        Route::post('/', 'CategoriesController@create')->name('create-category');
+        Route::get('/', 'CategoriesController@index')->name('display-categories');
+
+    });
+    
+    Route::group( ['prefix' => 'product'], function(){
+
+        Route::post('/', 'ProductsController@create')->name('create-product');
+        Route::get('/', 'ProductsController@index')->name('display-products');
+        Route::delete('/{pid}', 'ProductsController@destroy')->name('delete-products');
+        Route::post('/photo', 'ProductsController@uploadPhoto')->name('upload-product-photo');
+
     });
 
     

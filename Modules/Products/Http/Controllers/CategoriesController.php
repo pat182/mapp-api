@@ -17,9 +17,14 @@ class CategoriesController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $req)
     {
-        
+
+        return response()->json([
+
+            'data' => $this->category->getCategories( $req->query())
+
+        ],200);
     }
 
     
@@ -35,7 +40,7 @@ class CategoriesController extends Controller
     
     public function store(Request $request)
     {
-        //
+        
     }
 
     

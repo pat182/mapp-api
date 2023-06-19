@@ -22,7 +22,7 @@ class ServerErrorException extends BaseException
     
     public function errorCode()
     {
-        return '--';
+        return 'server-error';
         
     }
 }
