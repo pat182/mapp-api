@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Modules\Auth\Services\AuthService;
 use Modules\User\Entities\Repositories\UserRepository;
-
+use Modules\Products\Entities\Repositories\CategoryRepository;
 
 class ProductTest extends TestCase
 {
@@ -15,11 +15,11 @@ class ProductTest extends TestCase
 
         $cred = (new AuthService(new UserRepository()))->login([
                 "username" => 'pat182',
-                "password" => 'test182!@#'            
+                "password" => 'test123!@#'            
         ]);
         $dummyData = [
             
-            "description" => "outdoors item"
+            "description" => fake()->realText(180)
         ];
 
         $res = $this->json('POST', 'api/product',$dummyData,[
@@ -35,14 +35,14 @@ class ProductTest extends TestCase
 
         $cred = (new AuthService(new UserRepository()))->login([
                 "username" => 'pat182',
-                "password" => 'test182!@#'            
+                "password" => 'test123!@#'            
         ]);
         
         $dummyData = [
 
-            "category" => 51,
-            "name" => "pokeball",
-            "description" => "item for catching pokemon"
+            "category" => CategoryRepository::inRandomOrder()->first()->id,
+            "name" => fake()->word(5),
+            "description" => fake()->realText(180)
         ];
         
         $this->json('POST', 'api/product', $dummyData, [

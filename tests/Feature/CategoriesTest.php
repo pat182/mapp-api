@@ -15,17 +15,18 @@ class CategoriesTest extends TestCase
 
         $cred = (new AuthService(new UserRepository()))->login([
                 "username" => 'pat182',
-                "password" => 'test182!@#'            
+                "password" => 'test123!@#'            
         ]);
         $dummyData = [
             
             "description" => "outdoors item"
         ];
 
-        $res = $this->json('POST', 'api/categories',$dummyData,[
+        $res = $this->json('POST', 'api/category',$dummyData,[
             'Accept' => 'application/json',
             'Authorization' => "Bearer {$cred['token']}"
         ]);
+        
         $res->assertStatus(422);
     }
     public function testCreateNewCategorySuccess()
@@ -35,15 +36,15 @@ class CategoriesTest extends TestCase
 
         $cred = (new AuthService(new UserRepository()))->login([
                 "username" => 'pat182',
-                "password" => 'test182!@#'            
+                "password" => 'test123!@#'            
         ]);
         
         $dummyData = [
-            "name" => "outdoors",
-            "description" => "outdoors item"
+            "name" => fake()->word(5),
+            "description" => fake()->realText(180)
         ];
         
-        $this->json('POST', 'api/categories', $dummyData, [
+        $this->json('POST', 'api/category', $dummyData, [
                 'Accept' => 'application/json',
                 'Authorization' => "Bearer {$cred['token']}"
             ])

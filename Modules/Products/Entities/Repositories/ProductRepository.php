@@ -13,7 +13,7 @@ class ProductRepository extends Product
 {
 	public function __construct(){
 
-        $this->productPhoto = (new ProductPhotoRepository());
+        
 
     }
 
@@ -58,7 +58,7 @@ class ProductRepository extends Product
             return $product;
 
         }catch(\Exception $e){
-
+            dd($e);
             \DB::rollback();
             throw (new ServerErrorException());
             
@@ -74,7 +74,7 @@ class ProductRepository extends Product
             throw new NoDataFoundException();
 
         
-        $this->productPhoto->deletePhoto($product);
+        (new ProductPhotoRepository())->deletePhoto($product);
 
         $product->delete();
 
@@ -90,8 +90,7 @@ class ProductRepository extends Product
 
         $payload = $req->payload();
         $payload['product'] = decrypt($payload['product']);
-        $photo = $this->productPhoto->uploadPhoto($payload);
-        
+        $photo = (new ProductPhotoRepository())->uploadPhoto($payload);
         return $photo;
 
     }

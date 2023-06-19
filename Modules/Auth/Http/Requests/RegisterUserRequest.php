@@ -25,7 +25,8 @@ class RegisterUserRequest extends FormRequest{
    	public function payload()
     {
         return $this->only([
-
+            
+            "user.role",
             "user.username",
             "user.email",
             "user.password",
