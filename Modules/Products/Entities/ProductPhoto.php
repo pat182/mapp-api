@@ -11,7 +11,7 @@ class ProductPhoto extends Model
 
     protected $table = 'product_photos';
     
-    protected $fillable = ['product','description','path'];
+    protected $fillable = ['product','description','path','is_primary'];
     
     public function product(){
 
