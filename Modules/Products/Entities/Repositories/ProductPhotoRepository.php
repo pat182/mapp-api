@@ -20,6 +20,7 @@ class ProductPhotoRepository extends ProductPhoto
         $path = "{$user->user_id}_product_photos/";
         $data = [];
         try{
+            
             foreach($photo['photos'] as $photoDetails){
                 
                 if(Storage::has($path) ){
@@ -28,13 +29,14 @@ class ProductPhotoRepository extends ProductPhoto
                         $path.$photoDetails['photo']->getClientOriginalName(),
                         file_get_contents($photoDetails['photo'])
                     );
-
+                    $primary = 0;
                 }else{
 
                     $photoDetails['photo']->storeAs(
                         $path,
                         $photoDetails['photo']->getClientOriginalName()
                     );
+                    $primary = 1;
 
                 }
                 array_push($data, static::updateOrCreate([
@@ -44,14 +46,15 @@ class ProductPhotoRepository extends ProductPhoto
                      ],[
                     'product' => $photo['product'],
                     'path' => $path.$photoDetails['photo']->getClientOriginalName(),
-                    'description' => isset($photoDetails['description']) ? $photoDetails['description'] : ''
+                    'description' => isset($photoDetails['description']) ? $photoDetails['description'] : '',
+                    'is_primary' => $primary
                 ])->toArray());
                 
 
             }
             return $data; 
         }catch(\Exception $e){
-
+            dd($e);
             throw (new ServerErrorException());
 
         }
