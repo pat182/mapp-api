@@ -94,4 +94,27 @@ class ProductRepository extends Product
         return $photo;
 
     }
+
+    public function setProductPhoto($prodId,$id) : array{
+        $pp = (new ProductPhotoRepository());
+
+        
+        $unset = $pp->where('is_primary' , 1)
+        ->where('product', $prodId)->update([
+            "is_primary" => 0
+        ]);
+
+        $set = tap($pp->where('id',decrypt($id)))
+        ->update([
+
+            'is_primary' => 1
+
+        ])->first();
+
+        return [
+            "message" => explode('/', $set->path)[1] . " Succesfully Set",
+            "data" => $set
+        ];        
+
+    }
 }

@@ -54,7 +54,7 @@ class ProductPhotoRepository extends ProductPhoto
             }
             return $data; 
         }catch(\Exception $e){
-            dd($e);
+          
             throw (new ServerErrorException());
 
         }
