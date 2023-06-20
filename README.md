@@ -9,7 +9,7 @@ rest Authentication with test cases(laravel 10(php 8.1), tymon jwt, nwidart modu
 - php artisan module:migrate
 - php artisan db:seed
 - php artisan storage:link
-
+- use the env.example
 
 https://documenter.getpostman.com/view/10909255/2s93sjUovY
 
