@@ -13,9 +13,15 @@ class ProductPhoto extends Model
     
     protected $fillable = ['product','description','path','is_primary'];
     
+    protected $appends = ['encId'];
+
     public function product(){
 
         return $this->belongsTo(ProductRepository::class,'product');
 
+    }
+    public function getEncIdAttribute()
+    {
+        return $this->attributes['encId'] = encrypt($this->id);  
     }
 }

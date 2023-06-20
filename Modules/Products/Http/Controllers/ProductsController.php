@@ -49,6 +49,14 @@ class ProductsController extends Controller
         ],200);
 
     }
+    public function setProductPhoto(Request $req, $id){
+
+        $req->validate(['product' => 'required|exists:products,id']);
+
+        return response()->json($this->product->setProductPhoto($req->product,$id),200);
+        
+
+    }
     // public function show($id)
     // {
         

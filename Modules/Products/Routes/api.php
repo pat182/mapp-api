@@ -28,6 +28,7 @@ Route::group(['middleware' => ['api','jwt.verify']], function ($router) {
         Route::get('/', 'ProductsController@index')->name('display-products');
         Route::delete('/{pid}', 'ProductsController@destroy')->name('delete-products');
         Route::post('/photo', 'ProductsController@uploadPhoto')->name('upload-product-photo');
+        Route::put('/{id}/photo', 'ProductsController@setProductPhoto')->name('set-product-photo');
 
     });
 
