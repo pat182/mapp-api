@@ -18,7 +18,7 @@ class LoginResource extends JsonResource
             'email' => $this->resource['email'],
             'f_name' => $this->resource['f_name'],
             'l_name' => $this->resource['l_name'],
-            // 'path' => $this->resource['path'],
+            'role' => $this->resource['role'],
             "token" => $this->resource['token'],
             "expires_in" => $this->resource['expires_in'],
             "expires_at" => $this->resource['expires_at']

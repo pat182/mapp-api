@@ -29,7 +29,9 @@ class AuthService
             
         
         $user = $this->userRepository::getUser(Auth::id())
-        ->with('userProfile')->first();
+        ->with([
+                'userProfile','userRole','userRole.permissionGroup'
+        ])->first();
 
         return $this->createToken($user,$rm);
 
@@ -37,9 +39,10 @@ class AuthService
     private function createToken($user,$rm){
         
         // 1440
+        
         $token = $rm ? auth()->setTTL(null)->login($user) : auth()->setTTL(1440)->login($user);
         $ttl = auth('api')->factory()->getTTL() * 60;
-       
+        
         return [
 
             'user_id' => $user->user_id,
@@ -47,6 +50,7 @@ class AuthService
             'username' => $user->username,
             'f_name' => $user->userProfile ? $user->userProfile->f_name : 'N/A',
             'l_name' => $user->userProfile ? $user->userProfile->l_name : 'N/A',
+            'role' => $user->userRole,
             'token' => $token,
             'expires_in' => $ttl,
             'expires_at' => Carbon::now()->addMinutes(intval($ttl))->toDateTimeString()

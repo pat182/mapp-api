@@ -3,6 +3,7 @@
 namespace Modules\Role\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Role\Entities\Repositories\PermissionGroupRepository;
 
 class Role extends Model
 {
@@ -16,8 +17,7 @@ class Role extends Model
     public $timestamps = false;
     
     
-    
-    // public function permissionGroup(){
-    //     return $this->hasMany(PermissionGroupRepository::class,'permission_type_id','permission_type_id');
-    // }
+    public function permissionGroup(){
+        return $this->hasMany(PermissionGroupRepository::class,'role_id');
+    }
 }
