@@ -18,7 +18,6 @@ class AuthService
     {
         $this->userRepository = $userRepository;
     }
-
     public function login($request)
     {   
         $rm = isset($request['remember_me']) ? $request['remember_me'] : false;
