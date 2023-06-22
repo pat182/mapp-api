@@ -25,7 +25,7 @@ class UploadPhotoRequest extends FormRequest{
 
             // 'name' => 'required|string|between:1,255|unique:categories,name',
             'product' => 'required|string',
-            'description' => 'nullable|string',
+            // 'description' => 'nullable|string',
             'photos*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
 
         ]; 
