@@ -52,7 +52,7 @@ class ProductRepository extends Product
 
         \DB::beginTransaction();
         try{
-            
+            $payload['user'] = Auth::id();
             $product = static::create($payload);
             \DB::commit();
             return $product;

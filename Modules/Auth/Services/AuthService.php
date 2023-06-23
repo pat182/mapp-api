@@ -39,7 +39,7 @@ class AuthService
         
         // 1440
         
-        $token = $rm ? auth()->setTTL(null)->login($user) : auth()->setTTL(1440)->login($user);
+        $token = $rm ? auth()->setTTL(43800)->login($user) : auth()->setTTL(1440)->login($user);
         $ttl = auth('api')->factory()->getTTL() * 60;
         
         return [

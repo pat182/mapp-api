@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\User\Database\factories\UserFactory;
 use Modules\User\Entities\Repositories\UserProfileRepository;
 use Modules\Products\Entities\Repositories\CategoryRepository;
+use Modules\Products\Entities\Repositories\ProductRepository;
 use Modules\Role\Entities\Repositories\RoleRepository;
 
 class User extends Authenticatable implements JWTSubject
@@ -70,6 +71,11 @@ class User extends Authenticatable implements JWTSubject
     public function categories(){
 
         return $this->hasMany(CategoryRepository::class,'user');
+
+    }
+    public function products(){
+
+        return $this->hasMany(ProductRepository::class,'user');
 
     }
     public function userRole(){
