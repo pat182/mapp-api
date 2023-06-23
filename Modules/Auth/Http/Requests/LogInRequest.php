@@ -4,16 +4,17 @@ namespace Modules\Auth\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LogInRequest extends FormRequest{
-    public function authorize()
-    {
-        return true;
+    
+
+    public function rules(){
+        
+        return static::checkIfAdmin(); 
     }
 	/**
      * Get the validation rules that apply to the request.
      *
      * @return array
     */
-
    	public function payload()
     {
         $arr = $this->role_id == 1 ? [
@@ -42,8 +43,8 @@ class LogInRequest extends FormRequest{
 
             return array_merge([
 
-                'email' => 'required_without:username|string|email|exists:user,email',
-                'username' =>'required_without:email|string|exists:user,username',
+                'email' => 'required_without:username|string',
+                'username' =>'required_without:email|string',
                 
             ], $arr);
 
@@ -52,7 +53,7 @@ class LogInRequest extends FormRequest{
 
             return array_merge([
 
-                'username' => 'required|exists:user,username',
+                'username' => 'required',
                 
             ],$arr); 
 

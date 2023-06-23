@@ -15,7 +15,8 @@ class ProductTest extends TestCase
 
         $cred = (new AuthService(new UserRepository()))->login([
                 "username" => 'pat182',
-                "password" => 'test123!@#'            
+                "password" => 'test123!@#',
+                "role" => 1          
         ]);
         $dummyData = [
             

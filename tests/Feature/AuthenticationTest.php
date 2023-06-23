@@ -9,15 +9,16 @@ use Tests\TestCase;
 class AuthenticationTest extends TestCase
 {
     
-    public function testMustEnterUsernameAndPassword()
+    public function testMustEnterUsernamePasswordAndRole()
     {
         $this->json('POST', 'api/login')
             ->assertStatus(422)
             ->assertJson([
-                "message" => "The username field is required. (and 1 more error)",
+                "message" => "The username field is required. (and 2 more errors)",
                 "errors" => [
                     'username' => ["The username field is required."],
                     'password' => ["The password field is required."],
+                    'role' => ["The role field is required."]
                 ]
             ]);
     }
@@ -25,7 +26,8 @@ class AuthenticationTest extends TestCase
 
         $user = [
             "username" => "test182",
-            'password' => bcrypt('sample123')
+            'password' => bcrypt('sample123'),
+            'role' => 1
         ];
         $this->json('POST', 'api/login', $user, ['Accept' => 'application/json'])
         ->assertStatus(400)
@@ -41,7 +43,8 @@ class AuthenticationTest extends TestCase
 
         $loginData = [
             'username' => 'pat182',
-            'password' => 'test123!@#'
+            'password' => 'test123!@#',
+            "role"  => 1
         ];
         
         $this->json('POST', 'api/login', $loginData, ['Accept' => 'application/json'])
