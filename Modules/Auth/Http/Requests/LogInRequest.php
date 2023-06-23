@@ -43,7 +43,7 @@ class LogInRequest extends FormRequest{
 
             return array_merge([
 
-                'email' => 'required_without:username|string',
+                'email' => 'required_without:username|string|email',
                 'username' =>'required_without:email|string',
                 
             ], $arr);
