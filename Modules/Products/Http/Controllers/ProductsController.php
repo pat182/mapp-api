@@ -16,7 +16,7 @@ class ProductsController extends Controller
     }
     public function index(Request $req)
     {
-        $req->validate( [ 'category' => 'required' ] );
+        // $req->validate( [ 'category' => 'required' ] );
 
         return response()->json([
 
