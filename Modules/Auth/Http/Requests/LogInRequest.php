@@ -39,8 +39,8 @@ class LogInRequest extends FormRequest{
             'password' => 'required',
             'remember_me' => 'boolean|nullable'
         ];
-        if($this->role_id == 1){
-
+        if($this->role == 1){
+            
             return array_merge([
 
                 'email' => 'required_without:username|string|email',
