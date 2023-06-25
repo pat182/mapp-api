@@ -24,6 +24,7 @@ class ProductRepository extends Product
         $sort = isset($params['sort']) ? $params['sort'] : 'desc';
         $order = isset($params['order']) ? $params['order'] : 'created_at';
         $products = static::with('productPhoto')
+        ->with('category')
         ->when(isset($params['category']), function($q) use ($params){
             return $q->where('category',$params['category']);
         })
