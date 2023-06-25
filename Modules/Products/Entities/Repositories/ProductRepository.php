@@ -20,7 +20,7 @@ class ProductRepository extends Product
     public function getProduct(array $params,$catId){
         
         $page = isset($params['page']) ? $params['page'] : 1;
-        $perPage = isset($params['per_page']) ? $params['per_page'] : 10;
+        $perPage = isset($params['per_page']) ? $params['per_page'] : 12;
         $sort = isset($params['sort']) ? $params['sort'] : 'desc';
         $order = isset($params['order']) ? $params['order'] : 'created_at';
         $products = static::with(['productPhoto'=>function($q){
