@@ -14,7 +14,7 @@ class ProductTableSeeder extends Seeder
     {
         
         $product = ProductRepository::newF();
-        $product->count(10)->create(); 
+        $product->count(100)->create(); 
 
     }
          

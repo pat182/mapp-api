@@ -42,9 +42,6 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password'
     ];
-    public function userProfile(){
-        return $this->hasOne(UserProfileRepository::class,'user_id');
-    }
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -67,6 +64,10 @@ class User extends Authenticatable implements JWTSubject
     protected static function newF()
     {
         return UserFactory::new();
+    }
+    
+    public function userProfile(){
+        return $this->hasOne(UserProfileRepository::class,'user_id');
     }
     public function categories(){
 

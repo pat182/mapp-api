@@ -3,7 +3,7 @@
 namespace Modules\User\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\User\Database\factories\UserProfileFactory;
 use Modules\User\Entities\Repositories\UserRepository;
 
 class UserProfile extends Model
@@ -17,15 +17,16 @@ class UserProfile extends Model
         'user_id',
         'f_name',
         'l_name',
-        'path'
+        // 'path'
     ];
     public $timestamps = false;
     
     public function userR(){
-        return $this->belongsTo(UserRepository::class,'user_id');
+        return $this->hasOne(UserRepository::class,'user_id');
     }
-    // protected static function newFactory()
-    // {
-    //     return \Modules\User\Database\factories\UserProfileFactory::new();
-    // }
+
+    protected static function newF()
+    {
+        return UserProfileFactory::new();
+    }
 }

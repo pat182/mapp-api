@@ -3,7 +3,7 @@
 namespace Modules\User\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\User\Entities\Repositories\UserRepository;
+use Modules\User\Entities\Repositories\{UserRepository,UserProfileRepository};
 
 
 class UserTableSeeder extends Seeder
@@ -13,6 +13,7 @@ class UserTableSeeder extends Seeder
     {   
 
         $user = UserRepository::newF();
+        $userP = UserProfileRepository::newF();
         
         $user->count(2)->sequence([
 
@@ -27,7 +28,10 @@ class UserTableSeeder extends Seeder
                 'role' => 2,
                 'email' => 'patrick.chua182@gmail.com'
 
-            ])->create();
+        ])->create()->each(function($user) use ($userP){
+            $p = $userP->make();
+            $user->userProfile()->save($p);
+        });
         
 
     }
