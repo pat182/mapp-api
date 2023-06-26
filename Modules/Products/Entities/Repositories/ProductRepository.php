@@ -20,9 +20,9 @@ class ProductRepository extends Product
     public function getProduct(array $params,$catId){
         
         $page = isset($params['page']) ? $params['page'] : 1;
-        $perPage = isset($params['per_page']) ? $params['per_page'] : 12;
-        $sort = isset($params['sort']) ? $params['sort'] : 'desc';
-        $order = isset($params['order']) ? $params['order'] : 'created_at';
+        $perPage = isset($params['per_page']) ? $params['per_page'] : 18;
+        $sort = isset($params['sort']) ? $params['sort'] : 'Asc';
+        $order = isset($params['order']) ? $params['order'] : 'name';
         $products = static::with(['productPhoto'=>function($q){
             return $q->where('is_primary' , 1);
         },'category'])
@@ -38,6 +38,7 @@ class ProductRepository extends Product
             return $q->where( 'description', 'LIKE',  '%' . $params['description'] . '%' );
 
         })->where('user', Auth::id())
+        ->orderBy($order,$sort)
         ->paginate($perPage);
 
         if( empty($products->toArray()['data']) )
