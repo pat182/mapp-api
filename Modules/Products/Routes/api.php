@@ -17,6 +17,7 @@ Route::group(['middleware' => ['api','jwt.verify']], function ($router) {
     
     Route::group(['prefix' => 'category'],function(){
 
+        Route::get('/option','CategoriesController@getAll')->name('category-option');
         Route::post('/', 'CategoriesController@create')->name('create-category');
         Route::get('/', 'CategoriesController@index')->name('display-categories');
 

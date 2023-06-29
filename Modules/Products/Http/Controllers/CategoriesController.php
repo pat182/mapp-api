@@ -17,6 +17,14 @@ class CategoriesController extends Controller
 
     }
 
+    public function getAll(){
+
+        return response()->json([
+            'data' => $this->category->all()
+        ],200);
+
+    }
+
     public function index(Request $req)
     {
 

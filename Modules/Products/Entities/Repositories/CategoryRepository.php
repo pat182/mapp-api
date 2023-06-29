@@ -20,7 +20,7 @@ class CategoryRepository extends Categories
         $page = isset($params['page']) ? $params['page'] : 1;
         $sort = isset($params['sort']) ? $params['sort'] : 'DESC';
         $order = isset($params['order']) ? $params['order'] : 'created_at';
-        $perPage = isset($params['per_page']) ? $params['per_page'] : 10;
+        $perPage = isset($params['per_page']) ? $params['per_page'] : 18;
         
         $category = static::when(isset($params['name']), function($q) use ($params){
 
