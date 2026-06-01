@@ -10,6 +10,15 @@ rest Authentication with test cases(laravel 10(php 8.1), tymon jwt, nwidart modu
 - php artisan db:seed
 - php artisan storage:link
 - use the env.example change some db settings if needed
+- run php artisan test for some feature testing
+
+
+test user
+{
+    "username" : "pat182",
+    "password" : "test123!@#"
+}
+
 
 https://documenter.getpostman.com/view/10909255/2s93sjUovY
 
