@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('category')->unsigned()->index();
             $table->string( 'name' , 255 )->index();
-            $table->longText( 'description' )->index();
+            $table->longText( 'description');
             $table->timestamps();
             $table->foreign( 'category' )->references( 'id' )->on( 'categories' );
             
