@@ -13,21 +13,13 @@ class AuthenticationTest extends TestCase
     {
         $this->json('POST', 'api/login')
             ->assertStatus(422)
-            ->assertJson([
-                "message" => "The username field is required. (and 2 more errors)",
-                "errors" => [
-                    'username' => ["The username field is required."],
-                    'password' => ["The password field is required."],
-                    'role' => ["The role field is required."]
-                ]
-            ]);
+            ->assertJsonValidationErrors(['email', 'username', 'password']);
     }
     public function testFailLogin(){
 
         $user = [
             "username" => "test182",
             'password' => bcrypt('sample123'),
-            'role' => 1
         ];
         $this->json('POST', 'api/login', $user, ['Accept' => 'application/json'])
         ->assertStatus(400)
@@ -44,7 +36,6 @@ class AuthenticationTest extends TestCase
         $loginData = [
             'username' => 'pat182',
             'password' => 'test123!@#',
-            "role"  => 1
         ];
         
         $this->json('POST', 'api/login', $loginData, ['Accept' => 'application/json'])

@@ -8,7 +8,13 @@ class LogInRequest extends FormRequest{
 
     public function rules(){
         
-        return static::checkIfAdmin(); 
+        return [
+            'email' => 'required_without:username|string|email',
+            'username' =>'required_without:email|string',
+            'password' => 'required',
+            'remember_me' => 'boolean|nullable'
+        ];
+
     }
 	/**
      * Get the validation rules that apply to the request.
@@ -17,48 +23,11 @@ class LogInRequest extends FormRequest{
     */
    	public function payload()
     {
-        $arr = $this->role_id == 1 ? [
-            "role",
+        return $this->only([
             "username",
             "password",
             'remember_me'
-
-        ] : [
-                "role",
-                "username",
-                "password",
-                'remember_me'
-            ];
-        return $this->only($arr);
-    }
-
-    private function checkIfAdmin() : array {
-        $arr = [
-
-            "role" => "required|exists:role,role_id|exists:user,role",
-            'password' => 'required',
-            'remember_me' => 'boolean|nullable'
-        ];
-        if($this->role == 1){
-            
-            return array_merge([
-
-                'email' => 'required_without:username|string|email',
-                'username' =>'required_without:email|string',
-                
-            ], $arr);
-
-
-        }else{
-
-            return array_merge([
-
-                'username' => 'required',
-                
-            ],$arr); 
-
-        }
-
+        ]);
     }
     
 }
